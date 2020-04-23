@@ -19,7 +19,6 @@ namespace PowersTable
         {
             int userNum;
             userNum = EnterInt("Please enter a positive integer: ");
-
             Console.WriteLine("{0,10} {1,10} {2,10}", "Number", "Squared", "Cubed");
             Console.WriteLine("================================");
 
@@ -49,14 +48,22 @@ namespace PowersTable
                 }
                 if (!stopLoop)
                 {
-                    Console.WriteLine("Invalid entry.");
+                    Console.WriteLine("Invalid entry.\n");
                 }
             } while (!stopLoop);
-
             return temp;
         }
 
+        // prompts and gets input
+        public static string EnterResponse(string prompt)
+        {
+            Console.Write(prompt);
+            string input = Console.ReadLine();
+            return input;
+        }
+
         // flexible powers
+        // long to expand functional output range
         public static long Powers(int baseNum, int power)
         {
             if (power == 0)
@@ -82,15 +89,15 @@ namespace PowersTable
             string tempString;
             do
             {
-                Console.WriteLine("Try again? (y/n)");
-                tempString = Console.ReadLine().ToLower();
-                if (tempString != "y" && tempString != "n")
+                tempString = EnterResponse("Would you like to try again?").ToLower();
+                if (tempString == "y" || tempString == "n")
                 {
-                    Console.WriteLine("Invalid entry.\n");
+                    stopLoop = true;
                 }
                 else
                 {
-                    stopLoop = true;
+                    Console.WriteLine("Invalid entry.\n");
+                    stopLoop = false;
                 }
             } while (!stopLoop);
             if (tempString == "n")
